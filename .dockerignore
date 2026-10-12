@@ -1,0 +1,12 @@
+.git
+.github
+.venv
+.ruff_cache
+.pytest_cache
+.hypothesis
+.nicegui
+**/__pycache__
+*.egg-info
+bench/results
+docs
+tests

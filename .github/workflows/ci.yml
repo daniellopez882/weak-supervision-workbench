@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - name: Sync locked dev environment (no snorkel, no torch)
+        run: uv sync --locked
+      - name: ruff check
+        run: uv run ruff check .
+      - name: ruff format --check
+        run: uv run ruff format --check .
+      - name: pytest (default suite; WRENCH tests skip without data)
+        run: uv run pytest -q
+
+  image:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t weak-supervision-workbench:ci .
+      - name: Runs as uid 10001
+        run: test "$(docker run --rm --entrypoint id weak-supervision-workbench:ci -u)" = "10001"
+      - name: Smoke benchmark on the bundled demo corpus
+        run: |
+          docker run --rm weak-supervision-workbench:ci \
+            bench --suite smoke --no-snorkel --out /tmp/smoke-demo.json
+      - name: Web app serves the page and passes its health check
+        run: |
+          docker run -d --name wsw -p 8080:8080 weak-supervision-workbench:ci
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8080/healthz && break
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8080/healthz
+          curl -fsS http://127.0.0.1:8080/ | grep -q "Weak supervision workbench"
+          for attempt in $(seq 1 30); do
+            status=$(docker inspect --format '{{.State.Health.Status}}' wsw)
+            [ "$status" = "healthy" ] && break
+            sleep 2
+          done
+          docker inspect --format '{{.State.Health.Status}}' wsw | grep -qx healthy
+      - name: Container logs
+        if: always()
+        run: docker logs wsw || true
