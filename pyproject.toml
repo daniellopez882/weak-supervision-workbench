@@ -1,0 +1,56 @@
+[project]
+name = "weak-supervision-workbench"
+version = "0.1.0"
+description = "Labelling-function workbench: from-scratch label models, LF diagnostics and a conflict-driven active-learning queue."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Daniel Lopez" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "scikit-learn>=1.5",
+    "nicegui>=2.10",
+]
+
+[project.scripts]
+wsw = "wsw.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.112",
+    "ruff>=0.8",
+]
+reference = [
+    "snorkel>=0.10",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wsw"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "NPY", "RUF"]
+# L (label matrix), O (overlap matrix) and friends follow the papers' notation.
+# SIM300 misreads numpy comparisons such as ``L == positive`` as Yoda conditions.
+ignore = ["E741", "SIM300"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: needs downloaded WRENCH data; skipped when it is absent",
+    "reference: needs the optional snorkel reference group",
+]

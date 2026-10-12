@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Environments and tool caches
+.venv/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# NiceGUI per-user storage
+.nicegui/
+
+# Data and model files are fetched with `wsw fetch`, never committed
+/data/
+/models/
+*.parquet
+*.npz
+*.pt
+
+# Scratch benchmark output (results committed under bench/results/ are explicit)
+bench/tmp/

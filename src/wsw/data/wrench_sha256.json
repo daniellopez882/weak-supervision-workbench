@@ -1,0 +1,22 @@
+{
+  "agnews/label.json": "182fba2ed534fb447a61efa19ddcf951264db946bcf7d5bdb0284f0b39fb23f9",
+  "agnews/test.json": "f25140fee5149b14c4ec9ad6981acb7357d552f282ace1478bff536b6ddcac08",
+  "agnews/train.json": "6aa806387c07ad0ee53d3ecebcc47dc0c22c2961cd34e248656d32441ba079a3",
+  "agnews/valid.json": "b063b0eb549603a6db17e9f84e4695dd65bff3764f8af2404c12519aaef177e7",
+  "sms/label.json": "5ba8069344eaf5578717910018232889bb77d6dad78b7fe7d002aeb089bc7efb",
+  "sms/test.json": "7a3fad03b9ad609e91a276e92b3bc31fbb8a48eacbc1bf42853cd440a4f6c080",
+  "sms/train.json": "9d77f52d2af078dbcecffad72c6b22cb6f8fe89c68db0ad99e811be06ec46800",
+  "sms/valid.json": "977a3b91bdbdb12186b44ee422a51eac85de343b8159e4973b16cf4b3d245d32",
+  "trec/label.json": "c5b6ea0cd3a4632639df7eea02f92640ffb561dd6421d831bad7544defdb2e71",
+  "trec/test.json": "95b1a8fbefbeda9b75b96416814dd46794872809a2295832761b2a0b7bc5de3d",
+  "trec/train.json": "92a1cfc914222003512efd69ee55bd89150bf42f35400c1325f861bfe2a0e350",
+  "trec/valid.json": "56b27e6796ecb4fe63d60060306bdb65dec6f8e5f345cdce068eb50a5f90b5c9",
+  "yelp/label.json": "967b828cc8be19e8c086d420344eb245e008069972c09127b0d046dae4ea2b95",
+  "yelp/test.json": "0f53e11f520881fa339ed9eba0f6e5a5a63549f7f3cf4e267cc832eb0e2c0f09",
+  "yelp/train.json": "91420e26dc8ab12de7fec32602d9082778ee6fcf107546e2b7f1bee1c4741801",
+  "yelp/valid.json": "e8e9583d4e4b60f22c76d530b84ec6a678fee05760eb8cf5ff7e2b98dfab7c47",
+  "youtube/label.json": "6837af4230238ed5c9d5d32ce309083b24491fe5d085f0b779298e7c67eeb74a",
+  "youtube/test.json": "ef04412aee047657e41d7ad1411f11d05fce13b642bf1bec8897d138343ee12d",
+  "youtube/train.json": "8c487acf4e3e16b340e28f3633d5613f83c4db2d3b287e4341c86ff8f2192705",
+  "youtube/valid.json": "01d28d71c48e34bdde0566a9eead1d9694baa4eae176cea6d979bb59c4516df3"
+}
