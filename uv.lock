@@ -1451,7 +1451,6 @@ source = { editable = "." }
 dependencies = [
     { name = "nicegui" },
     { name = "numpy" },
-    { name = "scikit-learn" },
     { name = "scipy" },
 ]
 
@@ -1461,6 +1460,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "ruff" },
+    { name = "scikit-learn" },
 ]
 reference = [
     { name = "snorkel" },
@@ -1470,7 +1470,6 @@ reference = [
 requires-dist = [
     { name = "nicegui", specifier = ">=2.10" },
     { name = "numpy", specifier = ">=2.0" },
-    { name = "scikit-learn", specifier = ">=1.5" },
     { name = "scipy", specifier = ">=1.13" },
 ]
 
@@ -1480,6 +1479,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-asyncio", specifier = ">=0.24" },
     { name = "ruff", specifier = ">=0.8" },
+    { name = "scikit-learn", specifier = ">=1.5" },
 ]
 reference = [{ name = "snorkel", specifier = ">=0.10" }]
 

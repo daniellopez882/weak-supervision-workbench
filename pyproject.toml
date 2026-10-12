@@ -10,7 +10,6 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "numpy>=2.0",
     "scipy>=1.13",
-    "scikit-learn>=1.5",
     "nicegui>=2.10",
 ]
 
@@ -19,6 +18,8 @@ wsw = "wsw.cli:main"
 
 [dependency-groups]
 dev = [
+    # Parity reference for the TF-IDF, logistic-regression and metric code in tests only.
+    "scikit-learn>=1.5",
     "pytest>=8.3",
     "pytest-asyncio>=0.24",
     "hypothesis>=6.112",
