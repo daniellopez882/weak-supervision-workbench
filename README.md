@@ -277,9 +277,9 @@ returning a labelled row; the NiceGUI tests drive the page with NiceGUI's simula
 
 | Data | Where it comes from | Terms |
 |---|---|---|
-| WRENCH (YouTube, SMS, TREC, Yelp, AG News subsets with LF outputs) | [WRENCH](https://github.com/JieyuZ2/wrench), Zhang et al., NeurIPS 2021 Datasets and Benchmarks; fetched from the authors' Hugging Face copy `jieyuz2/WRENCH` at a pinned revision, so the bytes and their sha256 stay fixed | Apache-2.0 for the benchmark repository and mirror |
-| YouTube spam comments | Alberto, Lochter and Almeida, TubeSpam (UCI YouTube Spam Collection) | CC BY 4.0 |
-| SMS Spam Collection | Almeida and Gómez Hidalgo (UCI) | CC BY 4.0 |
+| WRENCH (YouTube, SMS, TREC, Yelp, AG News subsets with LF outputs) | [WRENCH](https://github.com/JieyuZ2/wrench), Zhang et al., NeurIPS 2021 Datasets and Benchmarks; fetched from the authors' Hugging Face copy `jieyuz2/WRENCH` at a pinned revision, so the bytes and their sha256 stay fixed | `Apache-2.0` for the benchmark repository and its Hugging Face copy |
+| YouTube spam comments | Alberto, Lochter and Almeida, TubeSpam (UCI YouTube Spam Collection) | `CC-BY-4.0` |
+| SMS Spam Collection | Almeida and Gómez Hidalgo (UCI) | `CC-BY-4.0` |
 | TREC question classification | Li and Roth, UIUC Cognitive Computation Group | distributed for research use; no explicit licence found |
 | Yelp review polarity | Zhang, Zhao and LeCun (2015), from the Yelp Dataset Challenge | Yelp dataset terms: academic, non-commercial use, no redistribution |
 | AG News | Zhang, Zhao and LeCun (2015), from AG's news corpus | academic, non-commercial use |
