@@ -11,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-from wsw.data import available_datasets, load_dataset, wrench
+from wsw.data import available_datasets, downloaded_datasets, load_dataset, wrench
 
 
 def _cmd_fetch(args: argparse.Namespace) -> int:
@@ -52,6 +52,14 @@ def _cmd_lfs(args: argparse.Namespace) -> int:
 def _cmd_app(args: argparse.Namespace) -> int:
     from wsw.app import serve
 
+    ready = downloaded_datasets()
+    if args.dataset not in ready:
+        print(
+            f"{args.dataset} is not downloaded; run `wsw fetch {args.dataset}` "
+            f"(ready now: {', '.join(ready)})",
+            file=sys.stderr,
+        )
+        return 2
     serve(
         args.dataset,
         host=args.host,
