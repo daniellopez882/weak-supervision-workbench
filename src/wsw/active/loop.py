@@ -57,7 +57,8 @@ class LoopConfig:
     batch_size: int = 25
     label_model: str = "dawid_skene"
     C: float = 1.0
-    #: Train the end model on the human labels only (no weak labels), as a reference curve.
+    #: Reference curve: the end model sees the human labels only, never the weak labels. The
+    #: label model is then fitted once (for strategies that read its posterior), not refitted.
     gold_only: bool = False
 
     def __post_init__(self) -> None:
@@ -74,8 +75,9 @@ class CurvePoint:
     n_labels: int
     end_accuracy: float
     end_f1: float
-    lm_accuracy: float
-    lm_f1: float
+    #: Label-model scores on the test split; ``None`` for a gold-only run.
+    lm_accuracy: float | None
+    lm_f1: float | None
 
 
 @dataclass(frozen=True)
@@ -122,7 +124,7 @@ def run_loop(task: Task, oracle: SimulatedOracle, config: LoopConfig) -> LoopRes
             labelled[picked] = True
             order.extend(int(i) for i in picked)
             answers.extend(int(a) for a in oracle(picked))
-            if model.accepts_gold:
+            if model.accepts_gold and not config.gold_only:
                 model = _fit_label_model(config, task, np.asarray(order), np.asarray(answers))
                 posterior = model.predict_proba(task.pool_L)
 
@@ -133,14 +135,14 @@ def run_loop(task: Task, oracle: SimulatedOracle, config: LoopConfig) -> LoopRes
             rows, targets = training_targets(task.pool_L, posterior, gold_idx, gold_y)
         end_model = train_end_model(task.pool_X, rows, targets, C=config.C, warm_start=end_model)
         end_pred = end_model.predict(task.test_X)
-        lm_pred = model.predict(task.test_L, eval_rng)
+        lm_pred = None if config.gold_only else model.predict(task.test_L, eval_rng)
         points.append(
             CurvePoint(
                 n_labels=len(order),
                 end_accuracy=accuracy(task.test_y, end_pred),
                 end_f1=f1(task.test_y, end_pred, task.k),
-                lm_accuracy=accuracy(task.test_y, lm_pred),
-                lm_f1=f1(task.test_y, lm_pred, task.k),
+                lm_accuracy=None if lm_pred is None else accuracy(task.test_y, lm_pred),
+                lm_f1=None if lm_pred is None else f1(task.test_y, lm_pred, task.k),
             )
         )
 
