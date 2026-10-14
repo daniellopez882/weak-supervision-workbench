@@ -1,5 +1,7 @@
 # weak-supervision-workbench
 
+[![ci](https://github.com/daniellopez882/weak-supervision-workbench/actions/workflows/ci.yml/badge.svg)](https://github.com/daniellopez882/weak-supervision-workbench/actions/workflows/ci.yml) ![python](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white) ![licence](https://img.shields.io/badge/licence-MIT-green)
+
 A small web app for building a labelled text dataset without labelling most of it by hand.
 You write labelling functions (keyword lists, regular expressions, optionally an LLM prompt),
 a label model works out how far to trust each one and turns their votes into probabilistic
